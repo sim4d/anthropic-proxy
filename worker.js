@@ -13,7 +13,7 @@ function initializeEnvironment(env) {
 }
 
 function debug(...args) {
-  if (!globalThis.DEBUG) return
+  // Always log for now to help with debugging
   console.log(...args)
 }
 
@@ -36,6 +36,7 @@ function mapStopReason(finishReason) {
 async function handleMessages(request, env) {
   try {
     const payload = await request.json()
+    debug('Incoming payload:', payload);
 
     // Helper to normalize a message's content.
     // If content is a string, return it directly.
@@ -179,8 +180,18 @@ async function handleMessages(request, env) {
         throw new Error(data.error.message)
       }
 
+      // Add more detailed logging
+      debug('Data structure:', {
+        hasChoices: !!data.choices,
+        choicesLength: data.choices ? data.choices.length : 0,
+        firstChoice: data.choices ? data.choices[0] : null
+      });
+
       const choice = data.choices[0]
       const openaiMessage = choice.message
+
+      debug('OpenAI message:', openaiMessage);
+      debug('Tool calls:', openaiMessage.tool_calls);
 
       // Map finish_reason to anthropic stop_reason.
       const stopReason = mapStopReason(choice.finish_reason)
