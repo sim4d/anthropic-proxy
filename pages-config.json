@@ -1,0 +1,14 @@
+{
+  "name": "anthropic-proxy-pages",
+  "main": "worker.js",
+  "compatibility_date": "2024-09-07",
+  "site": {
+    "bucket": "./public"
+  },
+  "vars": {
+    "ANTHROPIC_PROXY_BASE_URL": "https://openrouter.ai/api",
+    "REASONING_MODEL": "google/gemini-2.0-pro-exp-02-05:free",
+    "COMPLETION_MODEL": "google/gemini-2.0-pro-exp-02-05:free",
+    "DEBUG": "0"
+  }
+}

@@ -7,7 +7,10 @@
     "anthropic-proxy": "index.js"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev:worker": "wrangler dev",
+    "deploy:worker": "wrangler deploy",
+    "deploy:worker:prod": "wrangler deploy --env production"
   },
   "keywords": [
     "anthropic",
@@ -16,7 +19,9 @@
     "proxy",
     "claude",
     "streaming",
-    "sse"
+    "sse",
+    "cloudflare",
+    "worker"
   ],
   "repository": {
     "type": "git",
@@ -29,5 +34,8 @@
   "license": "MIT",
   "dependencies": {
     "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
   }
 }

@@ -29,6 +29,51 @@ To use the proxy server as a backend for Claude Code, you have to set the `ANTHR
 ANTHROPIC_BASE_URL=http://0.0.0.0:3000 claude
 ```
 
+## Cloudflare Deployment
+
+This proxy can be deployed to Cloudflare Workers or Cloudflare Pages.
+
+### Cloudflare Workers Deployment
+
+1. Install Wrangler CLI:
+   ```bash
+   npm install -g wrangler
+   ```
+
+2. Login to your Cloudflare account:
+   ```bash
+   wrangler login
+   ```
+
+3. Deploy the worker:
+   ```bash
+   npm run deploy:worker
+   ```
+
+4. Set your secrets in the Cloudflare dashboard or using Wrangler:
+   ```bash
+   wrangler secret put OPENROUTER_API_KEY
+   ```
+
+### Environment Variables for Cloudflare
+
+- `OPENROUTER_API_KEY`: Your OpenRouter API key (required when using OpenRouter)
+- `ANTHROPIC_PROXY_BASE_URL`: Custom base URL for the transformed OpenAI-format message (default: `openrouter.ai`)
+- `REASONING_MODEL`: The reasoning model to use (default: `google/gemini-2.0-pro-exp-02-05:free`)
+- `COMPLETION_MODEL`: The completion model to use (default: `google/gemini-2.0-pro-exp-02-05:free`)
+- `DEBUG`: Set to `1` to enable debug logging
+
+### Cloudflare Pages Deployment
+
+You can also deploy this as a Cloudflare Pages application:
+
+1. Create a new Pages project in your Cloudflare dashboard
+2. Connect your GitHub repository
+3. Set the build settings:
+   - Build command: `npm run build` (if you add a build script)
+   - Build output directory: `public`
+4. Add environment variables in the Pages project settings
+
 ## License
 Licensed under MIT license. Copyright (c) 2025 Max Nowack
 

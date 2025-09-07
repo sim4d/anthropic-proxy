@@ -1,0 +1,19 @@
+name = "anthropic-proxy"
+main = "worker.js"
+compatibility_date = "2024-09-07"
+
+[vars]
+# These are default values that can be overridden during deployment
+# ANTHROPIC_PROXY_BASE_URL = "https://openrouter.ai/api"
+# REASONING_MODEL = "google/gemini-2.0-pro-exp-02-05:free"
+# COMPLETION_MODEL = "google/gemini-2.0-pro-exp-02-05:free"
+# DEBUG = "0"
+
+# Add secrets in the dashboard or using:
+# wrangler secret put OPENROUTER_API_KEY
+
+[build]
+command = ""
+
+[env.production]
+name = "anthropic-proxy"
