@@ -13,7 +13,7 @@ function initializeEnvironment(env) {
 }
 
 function debug(...args) {
-  // Always log for now to help with debugging
+  if (!globalThis.DEBUG) return
   console.log(...args)
 }
 
@@ -35,6 +35,7 @@ function mapStopReason(finishReason) {
 
 async function handleMessages(request, env) {
   try {
+    console.log('handleMessages called');
     const payload = await request.json()
     debug('Incoming payload:', payload);
 
@@ -456,6 +457,7 @@ async function handleMessages(request, env) {
 export default {
   async fetch(request, env, ctx) {
     try {
+      console.log('Fetch handler called:', request.method, request.url);
       // Initialize environment variables
       initializeEnvironment(env)
       
