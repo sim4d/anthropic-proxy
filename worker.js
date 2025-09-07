@@ -1,5 +1,3 @@
-import { TextDecoder } from 'util'
-
 // Extract environment variables from the Worker context
 let baseUrl, requiresApiKey, key, models
 

@@ -1,6 +1,7 @@
-name = "anthropic-proxy"
+name = "ccr"
 main = "worker.js"
 compatibility_date = "2024-09-07"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 # These are default values that can be overridden during deployment
