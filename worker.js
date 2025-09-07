@@ -461,13 +461,19 @@ export default {
     try {
       console.log('Fetch handler called:', request.method, request.url);
       // Initialize environment variables
+      console.log('Initializing environment variables...');
       initializeEnvironment(env)
+      console.log('Environment variables initialized');
       
       // Set debug flag from environment
+      console.log('Setting debug flag...');
       globalThis.DEBUG = env.DEBUG === '1'
+      console.log('Debug flag set');
       
       // Handle CORS preflight requests
+      console.log('Checking for OPTIONS request...');
       if (request.method === 'OPTIONS') {
+        console.log('Handling OPTIONS request');
         return new Response(null, {
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -478,6 +484,7 @@ export default {
       }
 
       // Handle the main POST request to /v1/messages
+      console.log('Checking for POST /v1/messages request...');
       if (request.method === 'POST' && request.url.endsWith('/v1/messages')) {
         console.log('Calling handleMessages...');
         const result = await handleMessages(request, env);
@@ -486,6 +493,7 @@ export default {
       }
 
       // Default response for other routes
+      console.log('Returning default response');
       return new Response('Anthropic Proxy Worker is running', {
         headers: { 'Content-Type': 'text/plain' }
       })
