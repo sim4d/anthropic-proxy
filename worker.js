@@ -444,7 +444,8 @@ async function handleMessages(request, env) {
       }
     })
   } catch (err) {
-    console.error(err)
+    console.error('Error in handleMessages:', err)
+    console.error('Error stack:', err.stack)
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -454,31 +455,40 @@ async function handleMessages(request, env) {
 
 export default {
   async fetch(request, env, ctx) {
-    // Initialize environment variables
-    initializeEnvironment(env)
-    
-    // Set debug flag from environment
-    globalThis.DEBUG = env.DEBUG === '1'
-    
-    // Handle CORS preflight requests
-    if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        }
+    try {
+      // Initialize environment variables
+      initializeEnvironment(env)
+      
+      // Set debug flag from environment
+      globalThis.DEBUG = env.DEBUG === '1'
+      
+      // Handle CORS preflight requests
+      if (request.method === 'OPTIONS') {
+        return new Response(null, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          }
+        })
+      }
+
+      // Handle the main POST request to /v1/messages
+      if (request.method === 'POST' && request.url.endsWith('/v1/messages')) {
+        return await handleMessages(request, env)
+      }
+
+      // Default response for other routes
+      return new Response('Anthropic Proxy Worker is running', {
+        headers: { 'Content-Type': 'text/plain' }
+      })
+    } catch (err) {
+      console.error('Error in fetch handler:', err)
+      console.error('Error stack:', err.stack)
+      return new Response(JSON.stringify({ error: err.message }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
       })
     }
-
-    // Handle the main POST request to /v1/messages
-    if (request.method === 'POST' && request.url.endsWith('/v1/messages')) {
-      return await handleMessages(request, env)
-    }
-
-    // Default response for other routes
-    return new Response('Anthropic Proxy Worker is running', {
-      headers: { 'Content-Type': 'text/plain' }
-    })
   }
 }
