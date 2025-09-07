@@ -485,7 +485,9 @@ export default {
 
       // Handle the main POST request to /v1/messages
       console.log('Checking for POST /v1/messages request...');
-      if (request.method === 'POST' && request.url.endsWith('/v1/messages')) {
+      console.log('Request URL:', request.url);
+      // Check if the URL contains /v1/messages (accounting for query parameters)
+      if (request.method === 'POST' && request.url.includes('/v1/messages')) {
         console.log('Calling handleMessages...');
         const result = await handleMessages(request, env);
         console.log('handleMessages completed');
