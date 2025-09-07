@@ -198,12 +198,16 @@ async function handleMessages(request, env) {
             type: 'text'
           },
           ...(toolCalls && Array.isArray(toolCalls) 
-            ? toolCalls.map(toolCall => ({
-                type: 'tool_use',
-                id: toolCall.id,
-                name: toolCall.function.name,
-                input: JSON.parse(toolCall.function.arguments),
-              }))
+            ? toolCalls.map(toolCall => {
+                // Add a check for toolCall.function.arguments
+                const args = toolCall.function.arguments || '{}';
+                return {
+                  type: 'tool_use',
+                  id: toolCall.id,
+                  name: toolCall.function.name,
+                  input: JSON.parse(args),
+                };
+              })
             : []),
         ],
         id: messageId,
