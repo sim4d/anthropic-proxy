@@ -197,12 +197,14 @@ async function handleMessages(request, env) {
             text: openaiMessage.content,
             type: 'text'
           },
-          ...toolCalls.map(toolCall => ({
-            type: 'tool_use',
-            id: toolCall.id,
-            name: toolCall.function.name,
-            input: JSON.parse(toolCall.function.arguments),
-          })),
+          ...(toolCalls && Array.isArray(toolCalls) 
+            ? toolCalls.map(toolCall => ({
+                type: 'tool_use',
+                id: toolCall.id,
+                name: toolCall.function.name,
+                input: JSON.parse(toolCall.function.arguments),
+              }))
+            : []),
         ],
         id: messageId,
         model: openaiPayload.model,
