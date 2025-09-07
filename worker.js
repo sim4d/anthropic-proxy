@@ -36,7 +36,9 @@ function mapStopReason(finishReason) {
 async function handleMessages(request, env) {
   try {
     console.log('handleMessages called');
+    console.log('Parsing request body...');
     const payload = await request.json()
+    console.log('Request body parsed successfully');
     debug('Incoming payload:', payload);
 
     // Helper to normalize a message's content.
@@ -477,7 +479,10 @@ export default {
 
       // Handle the main POST request to /v1/messages
       if (request.method === 'POST' && request.url.endsWith('/v1/messages')) {
-        return await handleMessages(request, env)
+        console.log('Calling handleMessages...');
+        const result = await handleMessages(request, env);
+        console.log('handleMessages completed');
+        return result;
       }
 
       // Default response for other routes
