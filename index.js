@@ -49,9 +49,9 @@ fastify.post('/v1/messages', async (request, reply) => {
     const normalizeContent = (content) => {
       if (typeof content === 'string') return content
       if (Array.isArray(content)) {
-        return content.map(item => item.text).join(' ')
+        return content.map(item => String(item.text || '')).join(' ')
       }
-      return null
+      return '' // Return empty string instead of null
     }
 
     // Build messages array for the OpenAI payload.
