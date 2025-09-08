@@ -6,8 +6,8 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 # These are default values that can be overridden during deployment
 # ANTHROPIC_PROXY_BASE_URL = "https://openrouter.ai/api"
-# REASONING_MODEL = "google/gemini-2.0-pro-exp-02-05:free"
-# COMPLETION_MODEL = "google/gemini-2.0-pro-exp-02-05:free"
+# REASONING_MODEL = "google/gemini-2.5-pro"
+# COMPLETION_MODEL = "google/gemini-2.5-pro"
 # DEBUG = "0"
 
 # Add secrets in the dashboard or using:
