@@ -2,8 +2,7 @@
 let baseUrl, requiresApiKey, key, models
 
 function initializeEnvironment(env) {
-  //baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://openrouter.ai/api'
-  baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/models'
+  baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://openrouter.ai/api'
   requiresApiKey = !env.ANTHROPIC_PROXY_BASE_URL
   key = requiresApiKey ? env.OPENROUTER_API_KEY : null
   const model = 'gemini-2.5-pro'
@@ -162,7 +161,8 @@ async function handleMessages(request, env) {
       headers['Authorization'] = `Bearer ${key}`
     }
     
-    const openaiResponse = await fetch(`${baseUrl}/v1/chat/completions`, {
+    //const openaiResponse = await fetch(`${baseUrl}/v1/chat/completions`, {
+    const openaiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/openai/`, {
       method: 'POST',
       headers,
       body: JSON.stringify(openaiPayload)
