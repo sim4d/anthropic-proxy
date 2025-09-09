@@ -5,7 +5,7 @@ function initializeEnvironment(env) {
   baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://openrouter.ai/api'
   requiresApiKey = !env.ANTHROPIC_PROXY_BASE_URL
   key = requiresApiKey ? env.OPENROUTER_API_KEY : null
-  const model = 'google/gemini-2.5-pro'
+  const model = 'qwen/qwen3-coder:free'
   models = {
     reasoning: env.REASONING_MODEL || model,
     completion: env.COMPLETION_MODEL || model,
