@@ -162,7 +162,7 @@ async function handleMessages(request, env) {
     }
     
     //const openaiResponse = await fetch(`${baseUrl}/v1/chat/completions`, {
-    const openaiResponse = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/', {
+    const openaiResponse = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
       method: 'POST',
       headers,
       body: JSON.stringify(openaiPayload)
