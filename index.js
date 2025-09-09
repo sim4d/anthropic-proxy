@@ -72,15 +72,13 @@ fastify.post('/v1/messages', async (request, reply) => {
     if (payload.messages && Array.isArray(payload.messages)) {
       payload.messages.forEach(msg => {
         const toolCalls = (Array.isArray(msg.content) ? msg.content : []).filter(item => item.type === 'tool_use').map(toolCall => ({
+          id: toolCall.id,
+          type: 'function',
           function: {
-            type: 'function',
-            id: toolCall.id,
-            function: {
-              name: toolCall.name,
-              parameters: toolCall.input,
-            },
-          }
-        }))
+            name: toolCall.name,
+            arguments: JSON.stringify(toolCall.input || {}),
+          },
+        }));
         const newMsg = { role: msg.role }
         const normalized = normalizeContent(msg.content)
         if (normalized) newMsg.content = normalized
