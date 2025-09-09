@@ -3,7 +3,7 @@ let baseUrl, requiresApiKey, key, models
 
 function initializeEnvironment(env) {
   //baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://openrouter.ai/api'
-  baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/models/'
+  baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/models'
   requiresApiKey = !env.ANTHROPIC_PROXY_BASE_URL
   key = requiresApiKey ? env.OPENROUTER_API_KEY : null
   const model = 'gemini-2.5-pro'
