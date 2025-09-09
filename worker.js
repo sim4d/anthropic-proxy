@@ -297,7 +297,7 @@ async function handleMessages(request, env) {
         const lines = chunk.split('\n')
 
         for (const line of lines) {
-          const trimmed = line.trim()
+          const trimmed = typeof line === 'string' ? line.trim() : '';
           if (trimmed === '' || !trimmed.startsWith('data:')) continue
           const dataStr = trimmed.replace(/^data:\s*/, '')
           if (dataStr === '[DONE]') {

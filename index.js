@@ -285,7 +285,7 @@ fastify.post('/v1/messages', async (request, reply) => {
 
 
         for (const line of lines) {
-          const trimmed = line.trim()
+          const trimmed = typeof line === 'string' ? line.trim() : '';
           if (trimmed === '' || !trimmed.startsWith('data:')) continue
           const dataStr = trimmed.replace(/^data:\s*/, '')
           if (dataStr === '[DONE]') {
