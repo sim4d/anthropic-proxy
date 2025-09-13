@@ -5,7 +5,7 @@ function initializeEnvironment(env) {
   baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://openrouter.ai/api'
   requiresApiKey = !env.ANTHROPIC_PROXY_BASE_URL
   key = requiresApiKey ? env.OPENROUTER_API_KEY : null
-  const model = 'gemini-2.5-pro'
+  const model = 'qwen/qwen3-coder:free'
   models = {
     reasoning: env.REASONING_MODEL || model,
     completion: env.COMPLETION_MODEL || model,
@@ -159,8 +159,8 @@ async function handleMessages(request, env) {
       headers['Authorization'] = `Bearer ${key}`
     }
     
-    //const openaiResponse = await fetch(`${baseUrl}/v1/chat/completions`, {
-    const openaiResponse = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
+    //const openaiResponse = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
+    const openaiResponse = await fetch(`${baseUrl}/v1/chat/completions`, {
       method: 'POST',
       headers,
       body: JSON.stringify(openaiPayload)
