@@ -6,8 +6,10 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 # These are default values that can be overridden during deployment
 # ANTHROPIC_PROXY_BASE_URL = "https://openrouter.ai/api"
-REASONING_MODEL = "x-ai/grok-4-fast:free"
-COMPLETION_MODEL = "x-ai/grok-4-fast:free"
+# REASONING_MODEL = "x-ai/grok-4-fast:free"
+# COMPLETION_MODEL = "x-ai/grok-4-fast:free"
+REASONING_MODEL = "qwen/qwen3-coder:free"
+COMPLETION_MODEL = "qwen/qwen3-coder:free"
 # DEBUG = "0"
 
 # Add secrets in the dashboard or using:
