@@ -10,10 +10,12 @@ compatibility_flags = ["nodejs_compat"]
 # COMPLETION_MODEL = "x-ai/grok-4-fast:free"
 # REASONING_MODEL = "qwen/qwen3-coder:free"
 # COMPLETION_MODEL = "qwen/qwen3-coder:free"
-REASONING_MODEL =  "z-ai/glm-4.5-air:free"
-COMPLETION_MODEL = "z-ai/glm-4.5-air:free"
-# DEBUG = "0"
-# DEBUG = "0"
+# REASONING_MODEL =  "z-ai/glm-4.5-air:free"
+# COMPLETION_MODEL = "z-ai/glm-4.5-air:free"
+
+ANTHROPIC_PROXY_BASE_URL = "https://ai-gateway.vercel.sh"
+REASONING_MODEL =  "xai/grok-4-fast-reasoning"
+COMPLETION_MODEL = "xai/grok-4-fast-reasoning"
 
 # Add secrets in the dashboard or using:
 # wrangler secret put OPENROUTER_API_KEY

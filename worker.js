@@ -3,7 +3,8 @@ let baseUrl, requiresApiKey, key, models
 
 function initializeEnvironment(env) {
   baseUrl = env.ANTHROPIC_PROXY_BASE_URL || 'https://openrouter.ai/api'
-  requiresApiKey = !env.ANTHROPIC_PROXY_BASE_URL
+  //requiresApiKey = !env.ANTHROPIC_PROXY_BASE_URL
+  requiresApiKey = true
   key = requiresApiKey ? env.OPENROUTER_API_KEY : null
   const model = 'qwen/qwen3-coder:free'
   models = {
